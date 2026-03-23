@@ -18,11 +18,40 @@ describe('Calculator basic operations', () => {
   test('20 / 5 equals 4', () => {
     expect(calc.divide(20, 5)).toBe(4);
   });
+
+  // New operation tests
+  test('5 % 2 equals 1 (modulo)', () => {
+    expect(calc.modulo(5, 2)).toBe(1);
+  });
+
+  test('2 ^ 3 equals 8 (power)', () => {
+    expect(calc.power(2, 3)).toBe(8);
+  });
+
+  test('square root of 16 equals 4', () => {
+    expect(calc.squareRoot(16)).toBe(4);
+  });
 });
 
 describe('Calculator edge cases', () => {
   test('division by zero throws', () => {
     expect(() => calc.divide(5, 0)).toThrow(/Division by zero/);
+  });
+
+  test('modulo by zero throws', () => {
+    expect(() => calc.modulo(5, 0)).toThrow(/Modulo by zero/);
+  });
+
+  test('power with zero exponent returns 1', () => {
+    expect(calc.power(2, 0)).toBe(1);
+  });
+
+  test('power with negative exponent returns fraction', () => {
+    expect(calc.power(2, -1)).toBeCloseTo(0.5);
+  });
+
+  test('square root of negative number throws', () => {
+    expect(() => calc.squareRoot(-1)).toThrow(/Square root of negative number/);
   });
 
   test('works with negative numbers', () => {
@@ -35,5 +64,6 @@ describe('Calculator edge cases', () => {
   test('works with floating point numbers', () => {
     expect(calc.add(1.5, 2.25)).toBeCloseTo(3.75);
     expect(calc.divide(5.5, 2)).toBeCloseTo(2.75);
+    expect(calc.squareRoot(2)).toBeCloseTo(Math.sqrt(2));
   });
 });
